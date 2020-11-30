@@ -10,12 +10,7 @@ public class ItemControllerTest extends AbstractTest{
 
 	@Test
 	void testValidationGreaterThan() throws Exception {
-		CustomerCreateDto createDto = new CustomerCreateDto();
-		mockMvc.perform(
-				MockMvcRequestBuilders.get("/item").param("id", "-2")
-						.content(objectMapper.writeValueAsBytes(createDto))
-						.contentType(MediaType.APPLICATION_JSON)
-		)
+		mockMvc.perform(MockMvcRequestBuilders.get("/item").param("id", "-2"))
 				.andExpect(jsonPath("$.message").value("Validation error"))
 				.andExpect(jsonPath("$.errors.length()").value(1))
 				.andExpect(jsonPath("$.errors[0].field").value("touchItem.id"))
